@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title RentalWheels</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/_Layout.css" rel="stylesheet" />   
+    <link rel="shortcut icon" href="~/Content/images/logo2.jpg" />
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top my-navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                    <img src="~/Content/images/logo2.jpg" alt="Logo" />
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Garage", "CarList", "CarList")</li>
+                    <li>@Html.ActionLink("Rentify", "Rentify", "Rentify")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Register", "Register", "Account")</li>
+                    @if (User.Identity.IsAuthenticated == false)
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Logoff", "Signout", "Account")</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content" style="margin-top:50px;">
+        @RenderBody()
+        @*<hr />*@
+        @*<footer class="footer" style="margin-top:10%;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>RentWheels</h5>
+                    <p>Discover the freedom of wheels</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                        <li><a href="@Url.Action("CarList","CarList")">Garage</a></li>
+                        <li><a href="@Url.Action("Rentify","Rentify")">Rentify</a></li>
+                         Additional links if needed
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contact Us</h5>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="exampleMessage" placeholder="Message"></textarea>
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-block">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </footer>*@
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    @section scripts {
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    
+    }
+</body>
+</html>

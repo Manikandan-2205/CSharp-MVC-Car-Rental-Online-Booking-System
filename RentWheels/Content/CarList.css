@@ -1,0 +1,35 @@
+﻿body {
+    background:linear-gradient(rgba(255, 255, 255, 0.87),#ccc,rgba(0, 0, 0, 0.1),#808080);
+}
+
+/* Add your CSS styles here */
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.product-card {
+    width: calc(30% - 10px); /* Adjust card width as per your requirement */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.87); /* Peripheral color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
+
+    .product-card .product-image {
+        margin-left: 5%;
+        width: 90%;
+        height: 30%;
+        border-radius: 5px; /* Ensure consistent image border radius */
+    }
+
+.product-info {
+    margin-top: 10px;
+}
+
+.list-group {
+    background-color: rgba(255, 255, 255, 0.87);
+}

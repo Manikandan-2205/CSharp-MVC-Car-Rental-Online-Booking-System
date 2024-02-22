@@ -1,0 +1,67 @@
+﻿
+    body {
+       background:linear-gradient(rgba(255, 255, 255, 0.87),#ccc,rgba(0, 0, 0, 0.1),#808080);
+        font-family:'Times New Roman';
+        margin-top: 3%;
+        /*padding: 0;
+        display: flex;*/
+        /*justify-content: center;
+        align-items: center;*/
+        /*height: 100vh;*/
+        /*background-image:url('../../content/images/car_images/rental_fom_background.jpg');
+        background-attachment:fixed;
+        background-position:center;
+        background-repeat:no-repeat;
+        background-size:cover;*/
+    }
+
+    #container1 {
+        width: 80%;
+        padding: 1%;
+        background-color: rgba(204, 241, 236, 0.9);
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        /*margin-top:100px;*/
+    }
+
+    .form-heading {
+        margin-bottom: 30px;
+        color: #333;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="datetime-local"] {
+        width: calc(100% - 22px);
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    .btn-submit {
+        margin-top:6%;
+        margin-left:0%;
+        width: 68%;
+        padding: 5px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        .btn-submit:hover {
+            background-color: #45a049;
+        }

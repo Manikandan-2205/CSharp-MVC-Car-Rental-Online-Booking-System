@@ -1,0 +1,124 @@
+﻿@model RentWheels.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+@Styles.Render("~/Content/css")
+@*<link href="~/Content/Register.css" rel="stylesheet" />*@
+@Scripts.Render("~/bundles/modernizr")
+
+<style>
+    #contmain {
+        display: flex;
+        justify-content: center;
+    }
+
+    #cont {
+        background-color: #85efec;
+        width: auto;
+        padding: 40px;
+    }
+
+    #imgcont {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+<div class="container col-md-12" id="contmain">
+    <div class="container" id="cont">
+        <div class="form-container">
+            <div class="col-md-12" id="imgcont">
+                <img src="~/Content/images/logo2.jpg" alt="Logo">
+            </div>
+            <div class="col-md-12" id="imgcont">
+                <h4>Please Register</h4>
+            </div>
+
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "needs-validation", novalidate = "true" }))
+            {
+                @Html.AntiForgeryToken()
+                     <!-- Logo -->
+
+                <div class="row">
+                    <!-- Left Column -->
+                    <div class="col-md-12">
+                        <!-- Username -->
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.RegisterDetail.Username)
+                            @Html.TextBoxFor(m => m.RegisterDetail.Username, new { @class = "form-control", required = "true", placeholder = "Enter your username" })
+                        </div>
+                        <!-- Email -->
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.RegisterDetail.Email)
+                            @Html.TextBoxFor(m => m.RegisterDetail.Email, new { @class = "form-control", type = "email", required = "true", placeholder = "Enter your email" })
+                        </div>
+                        <!-- Phone Number -->
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.RegisterDetail.PhoneNo)
+                            @Html.TextBoxFor(m => m.RegisterDetail.PhoneNo, new { @class = "form-control", required = "true", placeholder = "Enter your phone number" })
+                        </div>
+                        <!-- Gender -->
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.RegisterDetail.Gender)
+                            @Html.DropDownListFor(m => m.RegisterDetail.Gender, new List<SelectListItem>
+                                {
+                                    new SelectListItem { Text = "Male", Value = "Male" },
+                                    new SelectListItem { Text = "Female", Value = "Female" },
+                                    new SelectListItem { Text = "Other", Value = "Other" }
+                                }, "Select Gender", new { @class = "form-control", required = "true" })
+                        </div>
+                        <!-- Driving License Number -->
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.RegisterDetail.DrivingLicenseNo)
+                            @Html.TextBoxFor(m => m.RegisterDetail.DrivingLicenseNo, new { @class = "form-control", required = "true", placeholder = "Enter your driving license number" })
+                        </div>
+                        <!-- Aadhar Number -->
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.RegisterDetail.AadharNo)
+                            @Html.TextBoxFor(m => m.RegisterDetail.AadharNo, new { @class = "form-control", required = "true", placeholder = "Enter your Aadhar number" })
+                        </div>
+                        <!-- Age -->
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.RegisterDetail.Age)
+                            @Html.TextBoxFor(m => m.RegisterDetail.Age, new { @class = "form-control", type = "number", required = "true", placeholder = "Enter your age" })
+                        </div>
+                        <!-- Address -->
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.RegisterDetail.Address)
+                            @Html.TextAreaFor(m => m.RegisterDetail.Address, new { @class = "form-control", rows = "3", required = "true", placeholder = "Enter your address" })
+                        </div>
+                        <!-- Password -->
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.RegisterDetail.Password)
+                            @Html.PasswordFor(m => m.RegisterDetail.Password, new { @class = "form-control", id = "password", required = "true", placeholder = "Enter your password" })
+                        </div>
+                        <!-- Confirm Password -->
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.RegisterDetail.ConfirmPassword)
+                            @Html.PasswordFor(m => m.RegisterDetail.ConfirmPassword, new { @class = "form-control", id = "confirmPassword", required = "true", placeholder = "Confirm your password" })
+                        </div>
+                        <!-- Role Dropdown -->
+                        @*<div class="form-group">
+                            <label for="RoleId">Select Role:</label>
+                            @Html.DropDownListFor(m => m.RegisterDetail.RoleId, new SelectList(Model.RoleDetails, "RoleId", "RoleName"), "Select Role", new { @class = "form-control", required = "true" })
+                        </div>*@
+                    </div>
+                </div>
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+            }
+            <!-- Success Message -->
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["Message"]
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jquery")
+<script src="~/Scripts/Register.js"></script>
+@Scripts.Render("~/bundles/bootstrap")
+

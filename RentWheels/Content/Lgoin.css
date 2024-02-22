@@ -1,0 +1,31 @@
+﻿.login-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 2px solid #007bff; /* Border color */
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    transform: perspective(1000px) rotateX(5deg); /* 3D rotation */
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+.btn {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        transform: none; /* Reset rotation for smaller screens */
+    }
+}

@@ -1,0 +1,76 @@
+﻿.navbar-brand img {
+    height: 20px;
+    width: auto;
+}
+
+.my-navbar {
+    margin-top: 10px;
+    background-color: #;
+    border-radius: 10px;
+    margin: 10px 5%;
+}
+
+    .my-navbar .navbar-nav > li > a {
+        color: #fff;
+    }
+
+        .my-navbar .navbar-nav > li > a:hover,
+        .my-navbar .navbar-nav > li > a:focus {
+            background-color: #2980b9;
+        }
+
+@media (max-width: 767px) {
+    .my-navbar .navbar-nav .open .dropdown-menu > li > a {
+        color: #fff;
+    }
+
+        .my-navbar .navbar-nav .open .dropdown-menu > li > a:hover,
+        .my-navbar .navbar-nav .open .dropdown-menu > li > a:focus {
+            background-color: #2980b9;
+        }
+}
+
+body {
+    font-family: 'Alegreya Sans', sans-serif;
+}
+
+.footer {
+    background-color: rgba(220, 220, 220, 0.71);
+    padding: 50px 0;
+    color: #333;
+    border-radius: 10px;
+    font-family: 'Times New Roman';
+    font-size: 20px;
+}
+
+    .footer h5 {
+        color: #0056b3;
+        font-family: 'Times New Roman';
+    }
+
+.social-icons li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.social-icons a {
+    color: #555;
+}
+
+    .social-icons a:hover {
+        color: #007bff;
+    }
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.btn-secondary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+    .btn-secondary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }

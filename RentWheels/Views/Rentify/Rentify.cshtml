@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "Rentify";
+}
+<link href="~/Content/Rentify.css" rel="stylesheet" />
+    <div class="container" id="container1">
+    <h2 class="form-heading">Car Rental Booking</h2>
+    @using (Html.BeginForm("SaveData", "Rentify", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="CustomerName" class="col-form-label">Customer Name:</label>
+                <input type="text" class="form-control" id="CustomerName" name="CustomerName" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="PhoneNo" class="col-form-label">Phone Number:</label>
+                <input type="text" class="form-control" id="PhoneNo" name="PhoneNo" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="CarNo" class="col-form-label">Car Number:</label>
+                <select id="CarNo" class="form-control" name="CarNo" required>
+                    <option>Please Select Car No</option>                    
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="fees" class="col-form-label">Fees:</label>
+                <input type="text" class="form-control" id="fees" name="fees" readonly style="background-color:#ffffff">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="StartDate" class="col-form-label">Start Date:</label>
+                <input type="datetime-local" class="form-control" id="StartDate" name="StartDate" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="EndDate" class="col-form-label">End Date:</label>
+                <input type="datetime-local" class="form-control" id="EndDate" name="EndDate" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="TotalAmount" class="col-form-label">Total Amount:</label>
+                <input type="number" class="form-control" id="TotalAmount" name="TotalAmount" readonly>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <button type="submit" class="btn btn-primary btn-block btn-submit">Submit</button>
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts {
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/Rentify.js"></script>
+@if (TempData["SuccessMessage"] != null)
+    {
+    <script>
+            alert("@TempData["SuccessMessage"]");
+    </script>
+}
+}

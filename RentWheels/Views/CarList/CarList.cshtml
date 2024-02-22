@@ -1,0 +1,30 @@
+﻿@model List<RentWheels.Models.CarListDetailsViewModel>
+@{
+    ViewBag.Title = "Car List";
+}
+<link href="~/Content/CarList.css" rel="stylesheet" />
+<div class="container" id="container1">
+    <div class="product-container">
+        @foreach (var car in Model)
+        {
+            <div class="product-card">
+                <img src="@Url.Content(car.ImageUrl)" alt="Car Image" class="product-image">
+                <div class="product-info">
+                    <div class="product-title text-center">Car Specification</div>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Name:</strong> @car.BrandName  @car.ModelName</li>
+                        <li class="list-group-item"><strong>Color:</strong> @car.Color</li>
+                        <li class="list-group-item"><strong>Fuel Type:</strong> @car.FuelType</li>
+                        <li class="list-group-item"><strong>Ride Selection:</strong> @car.RideSelection</li>
+                        <li class="list-group-item"><strong>Fees:</strong> @car.Fees ₹ </li>
+                        <li class="list-group-item"><strong>Travel:</strong> @car.Travel (k/m)</li>
+                        <li class="list-group-item">
+                            <strong>Availability:</strong>
+                            <span class="label @(car.Available == "Yes" ? "label-success" : "label-danger")">@car.Available</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</div>
