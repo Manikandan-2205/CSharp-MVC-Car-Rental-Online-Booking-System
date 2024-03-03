@@ -1,39 +1,46 @@
-﻿.navbar-brand img {
-    height: 20px;
-    width: auto;
+﻿/* Reset and General Styles */
+body {
+    font-family: 'Alegreya Sans', sans-serif;
 }
 
+/* Typography */
+
+/* Navbar Styles */
 .my-navbar {
     margin-top: 10px;
-    background-color: #;
     border-radius: 10px;
     margin: 10px 5%;
 }
 
-    .my-navbar .navbar-nav > li > a {
-        color: #fff;
-    }
+/* Navbar Brand */
+.navbar-brand img {
+    height: 20px;
+    width: auto;
+}
 
-        .my-navbar .navbar-nav > li > a:hover,
-        .my-navbar .navbar-nav > li > a:focus {
-            background-color: #2980b9;
-        }
+/* Navbar Links */
+.my-navbar .navbar-nav > li > a {
+    color: #fff;
+}
 
+.my-navbar .navbar-nav > li > a:hover,
+.my-navbar .navbar-nav > li > a:focus {
+    background-color: #2980b9;
+}
+
+/* Media Queries */
 @media (max-width: 767px) {
     .my-navbar .navbar-nav .open .dropdown-menu > li > a {
         color: #fff;
     }
 
-        .my-navbar .navbar-nav .open .dropdown-menu > li > a:hover,
-        .my-navbar .navbar-nav .open .dropdown-menu > li > a:focus {
-            background-color: #2980b9;
-        }
+    .my-navbar .navbar-nav .open .dropdown-menu > li > a:hover,
+    .my-navbar .navbar-nav .open .dropdown-menu > li > a:focus {
+        background-color: #2980b9;
+    }
 }
 
-body {
-    font-family: 'Alegreya Sans', sans-serif;
-}
-
+/* Footer Styles */
 .footer {
     background-color: rgba(220, 220, 220, 0.71);
     padding: 50px 0;
@@ -43,11 +50,11 @@ body {
     font-size: 20px;
 }
 
-    .footer h5 {
-        color: #0056b3;
-        font-family: 'Times New Roman';
-    }
+.footer h5 {
+    color: #0056b3;
+}
 
+/* Social Icons */
 .social-icons li {
     display: inline-block;
     margin-right: 10px;
@@ -57,20 +64,34 @@ body {
     color: #555;
 }
 
-    .social-icons a:hover {
-        color: #007bff;
-    }
+.social-icons a:hover {
+    color: #007bff;
+}
 
+/* Form Styles */
 .form-group {
     margin-bottom: 20px;
 }
 
+/* Buttons */
 .btn-secondary {
     background-color: #007bff;
     border-color: #007bff;
 }
 
-    .btn-secondary:hover {
-        background-color: #0056b3;
-        border-color: #0056b3;
-    }
+.btn-secondary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Custom Positioning and Unique Elements */
+.navbar-right-center {
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.username {
+    color: #fff; /* Unique color for the username */
+    margin-top: 15px; /* Adjust as needed for vertical centering */
+}

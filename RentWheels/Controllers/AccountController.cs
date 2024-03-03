@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using RentWheels.Models;
 using RentWheels.ViewModels;
+using System.Web.Security;
 
 namespace RentWheels.Controllers
 {
@@ -19,44 +20,50 @@ namespace RentWheels.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(RegisterDetail model)
+        public ActionResult Login(string username, string password, string phoneNo)
         {
             if (ModelState.IsValid)
             {
-                var user = db.RegisterDetails.SingleOrDefault(u => u.PhoneNo == model.PhoneNo);
-
-                if (user != null && user.Password == model.Password)
+                var user = db.RegisterDetails.FirstOrDefault(u => u.Username == username && u.Password == password && u.PhoneNo ==phoneNo);
+                if (user != null)
                 {
-                    // Successful login
-                    TempData["Message"] = "Login successful.";
+                    FormsAuthentication.SetAuthCookie(user.Username, true);
+                    TempData["Username"] = user.Username; 
+                    TempData["PhoneNo"] = user.PhoneNo;
+                    return RedirectToAction("CarList","CarList"); 
                 }
                 else
                 {
-                    // Unsuccessful login
-                    TempData["Message"] = "Invalid PhoneNo or password.";
+                    ViewBag.Message = "Invalid username or password.";
+                    return View();
                 }
             }
-            else
-            {
-                // Model state is not valid
-                TempData["Message"] = "Login failed. Please provide valid information.";
-            }
-
-            // Redirect to the login page
-            return View(model);
+            return View();
         }
 
 
         public ActionResult Register()
         {
-            var viewModel = new RegisterViewModel
+            try
             {
-                RegisterDetail = new RegisterDetail(),
-                RoleDetails = db.RoleDetails.ToList()
-            };
+                using (var db = new RentWheelsEntities())
+                {
+                    var viewModel = new RegisterViewModel
+                    {
+                        RegisterDetail = new RegisterDetail(),
+                        RoleDetails = db.RoleDetails.ToList()
+                    };
 
-            return View(viewModel);
+                    return View(viewModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("Error");
+            }
         }
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -64,40 +71,31 @@ namespace RentWheels.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Check if the email or phone number already exists in the database
                 var existingEmail = db.RegisterDetails.FirstOrDefault(u => u.Email == viewModel.RegisterDetail.Email);
                 var existingPhone = db.RegisterDetails.FirstOrDefault(u => u.PhoneNo == viewModel.RegisterDetail.PhoneNo);
 
                 if (existingEmail != null)
                 {
-                    ModelState.AddModelError("", "An account with this email already exists.");
+                    ViewBag.Message = "An account with this email already exists.";
                 }
                 else if (existingPhone != null)
                 {
-                    ModelState.AddModelError("", "An account with this phone number already exists.");
+                    ViewBag.Message = "An account with this phone number already exists.";
                 }
                 else
                 {
-                    // Set default role ID to 2 (User)
                     viewModel.RegisterDetail.RoleId = 2;
-
-                    // Add the new user to the database
                     db.RegisterDetails.Add(viewModel.RegisterDetail);
                     db.SaveChanges();
 
-                    // Set confirmation message
-                    TempData["Message"] = "Registration successful. Please log in.";
+                    ViewBag.Message = "Registration successful. Please log in.";
 
-                    // Redirect to the login page after successful registration
                     return RedirectToAction("Login", "Account");
                 }
             }
 
-            // If ModelState is not valid or if there are errors, reload the page with the ViewModel
-            //viewModel.RegisterDetail = db.RegisterDetails.ToList();
             return View(viewModel);
         }
-
 
         public ActionResult ForgotPassword()
         {
@@ -107,15 +105,43 @@ namespace RentWheels.Controllers
         [HttpPost]
         public ActionResult ForgotPassword(string emailOrPhone)
         {
-            // Validate the email or phone and send OTP
-            // For demonstration purposes, let's assume the OTP is "1234"
+            return RedirectToAction("ResetPassword");
+
+        }
+
+        public ActionResult OTPProcessing(string emailOrPhone, string otp)
+        {
             var user = db.RegisterDetails.FirstOrDefault(u => u.Email == emailOrPhone || u.PhoneNo == emailOrPhone);
             if (user != null)
             {
-                // Generate OTP and send it to the provided email or phone number (Not implemented here)
-                TempData["OTP"] = "1234"; // For demonstration purposes only
-                TempData["EmailOrPhone"] = emailOrPhone;
-                return RedirectToAction("VerifyOTP");
+                if (string.IsNullOrEmpty(otp))
+                {
+                    Random random = new Random();
+                    int otpNumber = random.Next(100000, 999999);
+                    string generatedOtp = otpNumber.ToString();
+
+                    Session["OTP"] = generatedOtp;
+                    TempData["EmailOrPhone"] = emailOrPhone;
+
+                    // Send OTP via email or SMS (you need to implement this part)
+
+                    //ViewBag.Message = generatedOtp;                   
+
+                    return Content("OTP sent successfull ! Your OTP is: " + generatedOtp);
+                }
+                else
+                {
+                    string storedOtp = Session["OTP"] as string;
+                    if (otp == storedOtp)
+                    {
+                        return Content("OTP verification successfull.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Invalid OTP.");
+                        return View();
+                    }
+                }
             }
             else
             {
@@ -124,38 +150,6 @@ namespace RentWheels.Controllers
             }
         }
 
-        // Verify OTP Action
-        public ActionResult VerifyOTP()
-        {
-            // Generate a random 6-digit OTP
-            Random random = new Random();
-            int otpNumber = random.Next(100000, 999999);
-            string otp = otpNumber.ToString();
-
-            // Store the OTP in TempData for verification
-            TempData["OTP"] = otp;
-
-            // Display an alert message with the OTP
-            ViewBag.OTPMessage = "Your OTP is: " + otp;
-
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult VerifyOTP(string otp)
-        {
-            if (otp == TempData["OTP"].ToString())
-            {
-                return RedirectToAction("ResetPassword");
-            }
-            else
-            {
-                ModelState.AddModelError("", "Invalid OTP.");
-                return View();
-            }
-        }
-
-        // Reset Password Action
         public ActionResult ResetPassword()
         {
             return View();
@@ -170,23 +164,28 @@ namespace RentWheels.Controllers
             {
                 if (newPassword != confirmPassword)
                 {
-                    ModelState.AddModelError("", "The new password and confirm password do not match.");
+                    ViewBag.Message = "The new password and confirm password do not match.";
                     return View();
                 }
 
-                user.Password = newPassword; // Update the password
+                user.Password = newPassword;
                 db.SaveChanges();
-                TempData["Message"] = "Password reset successful. You can now login with your new password.";
+                ViewBag.Message = "Password reset successful. You can now login with your new password.";
                 return RedirectToAction("Login", "Account");
             }
             else
             {
-                ModelState.AddModelError("", "User not found.");
+                ViewBag.Message = "User not found.";
                 return View();
             }
         }
 
-
+        [HttpGet]
+        public ActionResult Signout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

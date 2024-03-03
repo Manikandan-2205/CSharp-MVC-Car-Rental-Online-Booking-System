@@ -17,7 +17,7 @@
                         @Html.LabelFor(model => model.OTP, htmlAttributes: new { @class = "control-label" })
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            @Html.EditorFor(model => model.OTP, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter OTP" } })
+                            @Html.EditorFor(model => model.OTP, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter OTP" } ,id = "emailorphone"})
                         </div>
                         @Html.ValidationMessageFor(model => model.OTP, "", new { @class = "text-danger" })
                     </div>
@@ -32,6 +32,21 @@
 @if (ViewBag.OTPMessage != null)
 {
     <script>
-        alert("@ViewBag.OTPMessage");
+        window.onload = function () {
+            generateotp();
+        };
+
+        function generateotp(){
+            $.ajax({                
+                success: function (otp) {
+                    
+                    alert("OTP sent successfully! Your OTP is: " + otp);
+                },
+                error: function (error) {
+                    console.error("Error fetching OTP: ", error);
+                }
+            });
+        }
     </script>
 }
+

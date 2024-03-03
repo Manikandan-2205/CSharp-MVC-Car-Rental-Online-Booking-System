@@ -37,5 +37,6 @@ namespace RentWheels.Models
         public virtual ICollection<CarRental> CarRentals { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarReturn> CarReturns { get; set; }
+        public virtual DisCount DisCount { get; set; }
     }
 }

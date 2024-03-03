@@ -1,0 +1,56 @@
+﻿/* Add your custom CSS styles here */
+        #container1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .form-content {
+            text-align: left;
+        }
+
+        .img-container {
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            max-height: 100%;
+        }
+
+        .btn-primary {
+            background-color: #ff9900;
+            color: #fff;
+            border: none;
+            padding: 10px 40px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-size: 16px;
+        } 
+ @media screen and (max-width: 768px) {
+            /* Adjust styles for smaller screens */
+            .form-container {
+                padding: 10px;
+            }
+        }

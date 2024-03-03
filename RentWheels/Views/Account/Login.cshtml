@@ -1,74 +1,63 @@
 ﻿@{
     ViewBag.Title = "Login";
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    <link href="~/Content/Login.css" rel="stylesheet" />
-</head>
+<link href="~/Content/Lgoin.css" rel="stylesheet" />
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-container">
-                    <div class="text-center">
-                        <img class="logo" src="~/Content/images/logo2.jpg" alt="Logo">
-                        <h2>Please Login</h2>
+        <div class="login-container">
+            <div class="text-center">
+                <img class="logo" src="~/Content/images/logo2.jpg" alt="Logo" style="width: 100px; margin-bottom: 20px;">
+                <h2>Please Login</h2>
+                @if (ViewBag.Message != null)
+                {
+                    <p class="error-message text-danger">@ViewBag.Message</p>
+                }
+            </div>
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "login-form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="container" style="margin: 20px;">
+                    <div class="form-group">
+                        <input type="text" class="form-control same-width" name="username" placeholder="Username" required>
                     </div>
-                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "login-form" }))
-                    {
-                        @Html.AntiForgeryToken()
-
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="username" placeholder="Username" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="PhoneNO" placeholder="Phone Number" required>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-                                <span class="input-group-addon">
-                                    <i id="showPassword" class="glyphicon glyphicon-eye-open"></i>
-                                </span>
+                    <div class="form-group">
+                        <input type="text" class="form-control same-width" name="PhoneNO" placeholder="Phone Number" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group same-width">
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                            <span class="input-group-addon show-password" id="showPassword">
+                                <i class="glyphicon glyphicon-eye-open"></i>
+                            </span>
+                            <div class="text-center">
+                                <a href="@Url.Action("ForgotPassword", "Account")">
+                                    <i class="glyphicon glyphicon-question-sign"></i> Forgot Password?
+                                </a>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Login</button>
-
-                        <div class="text-center">
-                            <a href="@Url.Action("ForgotPassword", "Account")">Forgot Password?</a>
-                        </div>
-                    }
+                    </div>
+                </div>                
+                <button type="submit" class="btn btn-primary">
+                    <i class="glyphicon glyphicon-log-in"></i> Login
+                </button>
+                <div class="text-center">
+                    <p>Don't have an account? <a href="@Url.Action("Register", "Account")">Create one</a>.</p>
                 </div>
-            </div>
+            }
         </div>
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    <script>
-        $(document).ready(function () {
-            // Show/Hide Password Functionality
-            $("#showPassword").click(function () {
-                var passwordField = $("#password");
-                var passwordFieldType = passwordField.attr("type");
-                if (passwordFieldType === "password") {
-                    passwordField.attr("type", "text");
-                    $("#showPassword").removeClass("glyphicon-eye-open").addClass("glyphicon-eye-close");
-                } else {
-                    passwordField.attr("type", "password");
-                    $("#showPassword").removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
-                }
-            });
-
-            var message = "@(TempData["Message"] ?? "")";
-            if (message !== "") {
-                alert(message);
-                var redirectUrl = "@Url.Action("Index", "Home")";
-                window.location.href = redirectUrl;
-            }
-        });
-    </script>
-    @Scripts.Render("~/bundles/bootstrap")
 </body>
-</html>
+@Scripts.Render("~/bundles/jquery")
+<script>
+    $(document).ready(function () {
+        $("#showPassword").click(function () {
+            var passwordField = $("#password");
+            var passwordFieldType = passwordField.attr("type");
+            passwordField.attr("type", passwordFieldType === "password" ? "text" : "password");
+            $("#showPassword i").toggleClass("glyphicon-eye-open glyphicon-eye-close");
+        });
+    });
+</script>
+
+
+

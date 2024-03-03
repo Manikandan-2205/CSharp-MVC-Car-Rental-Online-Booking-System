@@ -18,5 +18,6 @@ namespace RentWheels.Models
         public int Travel { get; set; }
         public string Available { get; set; }
         public string ImageUrl { get; set; }
+        public int? Discount { get; set; }
     }
 }

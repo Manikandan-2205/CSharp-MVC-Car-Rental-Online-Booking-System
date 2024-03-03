@@ -30,12 +30,11 @@ namespace RentWheels.Models
         public int Age { get; set; }
         public string Address { get; set; }
         public string Password { get; set; }
+        public string NewPassword { get; set; }
         public string ConfirmPassword { get; set; }
         public int RoleId { get; set; }
-
+        public int OTP { get; set; }
         public string EmailOrPhone { get; set; }
-        public string NewPassword { get; set; }
-        public string OTP { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarRental> CarRentals { get; set; }

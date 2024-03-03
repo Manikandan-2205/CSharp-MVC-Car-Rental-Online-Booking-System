@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title RentalWheels</title>
     @Styles.Render("~/Content/css")
-    <link href="~/Content/_Layout.css" rel="stylesheet" />   
+    <link href="~/Content/_Layout.css" rel="stylesheet" />
     <link rel="shortcut icon" href="~/Content/images/logo2.jpg" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -23,59 +23,84 @@
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Garage", "CarList", "CarList")</li>
-                    <li>@Html.ActionLink("Rentify", "Rentify", "Rentify")</li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Register", "Register", "Account")</li>
-                    @if (User.Identity.IsAuthenticated == false)
+                <ul class="nav navbar-nav navbar-center">
+                    <li>@Html.ActionLink("Carriage", "CarList", "CarList")</li>
+                    @*@if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                    <li>@Html.ActionLink("Rentify", "Rentify", "Rentify")</li>
                     }
+                    else
+                    {
+                        <li>@Html.ActionLink("Rentify", "Login", "Account")</li>
+                    }*@
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Logoff", "Signout", "Account")</li>
+                    <li>@Html.ActionLink("CarBack", "CarRental", "CarBack")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("CarBack", "Login", "Account")</li>
                     }
                 </ul>
+
+                @if (!User.Identity.IsAuthenticated)
+                  {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Register", "Register", "Account")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="user-profile">
+                            <div class="user-info">  
+                                <label class="label label-info" style="font-size:15px;"><span class="username glyphicon glyphicon-user">@User.Identity.Name</span></label>                                                             
+                            </div>
+                        </li>
+                        <li>@Html.ActionLink("Logout", "Signout", "Account")</li>
+                    </ul>
+                }
+
             </div>
         </div>
     </nav>
 
-    <div class="container body-content" style="margin-top:50px;">
+
+    <div class="container body-content" style="margin-top:20px;">
         @RenderBody()
         @*<hr />*@
         @*<footer class="footer" style="margin-top:10%;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <h5>RentWheels</h5>
-                    <p>Discover the freedom of wheels</p>
-                </div>
-                <div class="col-md-3">
-                    <h5>Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="@Url.Action("Index","Home")">Home</a></li>
-                        <li><a href="@Url.Action("CarList","CarList")">Garage</a></li>
-                        <li><a href="@Url.Action("Rentify","Rentify")">Rentify</a></li>
-                         Additional links if needed
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h5>Contact Us</h5>
-                    <form>
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h5>RentWheels</h5>
+                            <p>Discover the freedom of wheels</p>
                         </div>
-                        <div class="form-group">
-                            <textarea class="form-control" id="exampleMessage" placeholder="Message"></textarea>
+                        <div class="col-md-3">
+                            <h5>Quick Links</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                                <li><a href="@Url.Action("CarList","CarList")">Garage</a></li>
+                                <li><a href="@Url.Action("Rentify","Rentify")">Rentify</a></li>
+                                 Additional links if needed
+                            </ul>
                         </div>
-                        <button type="button" class="btn btn-secondary btn-block">Send</button>
-                    </form>
+                        <div class="col-md-3">
+                            <h5>Contact Us</h5>
+                            <form>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" id="exampleMessage" placeholder="Message"></textarea>
+                                </div>
+                                <button type="button" class="btn btn-secondary btn-block">Send</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </footer>*@
+            </footer>*@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
@@ -83,9 +108,9 @@
     @RenderSection("scripts", required: false)
 
     @section scripts {
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
-    
+        <script src="~/Scripts/bootstrap.js"></script>
+        <script src="~/Scripts/jquery-1.10.2.js"></script>
+
     }
 </body>
 </html>

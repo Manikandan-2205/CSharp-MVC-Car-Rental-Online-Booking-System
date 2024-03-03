@@ -1,7 +1,40 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿@model RentWheels.Models.RegisterDetail
+<style>
+    .email{
+        max-width:1000px;
+    }
+</style>
 
-<p>Use this area to provide additional information.</p>
+<div class="body justify-content-center">
+    <div class="register-container justify-content-center">
+        <div class="login-container col-md-10">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-sm-6">
+                                <div class="">
+                                    @Html.TextBoxFor(m => m.Username,new { @class= "form-control", placeholder="Username" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="">
+                                    @Html.TextBoxFor(m => m.PhoneNo, new { @class = "form-control", placeholder = "Phone number" })
+                                </div>
+                            </div>
+                        </div> 
+                     </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control email", placeholder = "Email Address" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

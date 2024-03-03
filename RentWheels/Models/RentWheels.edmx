@@ -18,7 +18,7 @@
           <Property Name="Fees" Type="int" Nullable="false" />
           <Property Name="FuelType" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Travel" Type="int" Nullable="false" />
-          <Property Name="Available" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Available" Type="varchar" MaxLength="50" />
           <Property Name="ImageUrl" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="CarRental">
@@ -43,6 +43,16 @@
           <Property Name="ReturnDate" Type="datetime" Nullable="false" />
           <Property Name="ExpiredDays" Type="int" Nullable="false" />
           <Property Name="TotalAmount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DisCount">
+          <Key>
+            <PropertyRef Name="CarNo" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarNo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ModelName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="BrandName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Offer" Type="int" />
         </EntityType>
         <EntityType Name="RegisterDetails">
           <Key>
@@ -103,6 +113,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DisCount_CarDetails">
+          <End Role="CarDetails" Type="Self.CarDetails" Multiplicity="1" />
+          <End Role="DisCount" Type="Self.DisCount" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CarDetails">
+              <PropertyRef Name="CarNo" />
+            </Principal>
+            <Dependent Role="DisCount">
+              <PropertyRef Name="CarNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Register_Role">
           <End Role="RoleDetails" Type="Self.RoleDetails" Multiplicity="1" />
           <End Role="RegisterDetails" Type="Self.RegisterDetails" Multiplicity="*" />
@@ -119,6 +141,7 @@
           <EntitySet Name="CarDetails" EntityType="Self.CarDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarRental" EntityType="Self.CarRental" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarReturn" EntityType="Self.CarReturn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DisCount" EntityType="Self.DisCount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegisterDetails" EntityType="Self.RegisterDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleDetails" EntityType="Self.RoleDetails" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CarRental_CarDetails" Association="Self.FK_CarRental_CarDetails">
@@ -132,6 +155,10 @@
           <AssociationSet Name="FK_CarReturn_CarDetails" Association="Self.FK_CarReturn_CarDetails">
             <End Role="CarDetails" EntitySet="CarDetails" />
             <End Role="CarReturn" EntitySet="CarReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisCount_CarDetails" Association="Self.FK_DisCount_CarDetails">
+            <End Role="CarDetails" EntitySet="CarDetails" />
+            <End Role="DisCount" EntitySet="DisCount" />
           </AssociationSet>
           <AssociationSet Name="FK_Register_Role" Association="Self.FK_Register_Role">
             <End Role="RoleDetails" EntitySet="RoleDetails" />
@@ -164,6 +191,11 @@
             <End Role="RoleDetail" EntitySet="RoleDetails" />
             <End Role="RegisterDetail" EntitySet="RegisterDetails" />
           </AssociationSet>
+          <EntitySet Name="DisCounts" EntityType="RentWheelsModel.DisCount" />
+          <AssociationSet Name="FK_DisCount_CarDetails" Association="RentWheelsModel.FK_DisCount_CarDetails">
+            <End Role="CarDetail" EntitySet="CarDetails" />
+            <End Role="DisCount" EntitySet="DisCounts" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CarDetail">
           <Key>
@@ -178,10 +210,11 @@
           <Property Name="Fees" Type="Int32" Nullable="false" />
           <Property Name="FuelType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Travel" Type="Int32" Nullable="false" />
-          <Property Name="Available" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Available" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ImageUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CarRentals" Relationship="RentWheelsModel.FK_CarRental_CarDetails" FromRole="CarDetail" ToRole="CarRental" />
           <NavigationProperty Name="CarReturns" Relationship="RentWheelsModel.FK_CarReturn_CarDetails" FromRole="CarDetail" ToRole="CarReturn" />
+          <NavigationProperty Name="DisCount" Relationship="RentWheelsModel.FK_DisCount_CarDetails" FromRole="CarDetail" ToRole="DisCount" />
         </EntityType>
         <EntityType Name="CarRental">
           <Key>
@@ -283,6 +316,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DisCount">
+          <Key>
+            <PropertyRef Name="CarNo" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarNo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ModelName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BrandName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Offer" Type="Int32" />
+          <NavigationProperty Name="CarDetail" Relationship="RentWheelsModel.FK_DisCount_CarDetails" FromRole="DisCount" ToRole="CarDetail" />
+        </EntityType>
+        <Association Name="FK_DisCount_CarDetails">
+          <End Type="RentWheelsModel.CarDetail" Role="CarDetail" Multiplicity="1" />
+          <End Type="RentWheelsModel.DisCount" Role="DisCount" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CarDetail">
+              <PropertyRef Name="CarNo" />
+            </Principal>
+            <Dependent Role="DisCount">
+              <PropertyRef Name="CarNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -353,6 +409,17 @@
               <MappingFragment StoreEntitySet="RoleDetails">
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DisCounts">
+            <EntityTypeMapping TypeName="RentWheelsModel.DisCount">
+              <MappingFragment StoreEntitySet="DisCount">
+                <ScalarProperty Name="Offer" ColumnName="Offer" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="CarNo" ColumnName="CarNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

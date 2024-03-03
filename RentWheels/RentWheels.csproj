@@ -131,12 +131,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CarBackController.cs" />
     <Compile Include="Controllers\CarListController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RentifyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CarBackViewModel.cs" />
     <Compile Include="Models\CarDetail.cs">
       <DependentUpon>RentWheels.tt</DependentUpon>
     </Compile>
@@ -146,6 +148,9 @@
     </Compile>
     <Compile Include="Models\CarRentalViewModel.cs" />
     <Compile Include="Models\CarReturn.cs">
+      <DependentUpon>RentWheels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DisCount.cs">
       <DependentUpon>RentWheels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RegisterViewModel.cs" />
@@ -173,11 +178,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\all.min.css" />
+    <Content Include="Content\bootstrap 5.0.0.min.css" />
+    <Content Include="Content\CarBack.css" />
+    <Content Include="Content\cdn.jsdelivr.net_npm_bootstrap-icons%401.3.0_font_bootstrap-icons.css" />
+    <Content Include="Content\images\from_background.jpg" />
+    <Content Include="Scripts\bootstrap 5.0.0.min.js" />
     <Content Include="Content\bootstrap.3.0.0.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CarList.css" />
-    <Content Include="Content\font-awesome.css" />
     <Content Include="Content\images\AltoMaruti.jpg" />
     <Content Include="Content\images\backgound_Car_List.jpg" />
     <Content Include="Content\images\BalenoMaruti.jpg" />
@@ -206,10 +216,13 @@
     <Content Include="Content\images\SwiftMaruti.jpg" />
     <Content Include="Content\images\VernaHyundai.jpg" />
     <Content Include="Content\images\Xuv500Mahindra.jpg" />
-    <Content Include="Content\jquery-3.7.1.min.js.js" />
+    <Content Include="Scripts\jquery-3.5.1.slim.min.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\CarRental.js" />
+    <Content Include="Scripts\jquery-3.7.1.min.js.js" />
     <Content Include="Content\Lgoin.css" />
+    <Content Include="Content\RentifyStyle.css" />
     <Content Include="Content\Register.css" />
-    <Content Include="Content\Rentify.css" />
     <Content Include="Content\_Layout.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -255,7 +268,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Login.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\popper.js.js" />
     <Content Include="Scripts\Register.js" />
     <Content Include="Scripts\Rentify.js" />
@@ -283,6 +295,7 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\VerifyOTP.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\CarBack\CarRental.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

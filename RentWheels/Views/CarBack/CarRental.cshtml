@@ -1,0 +1,53 @@
+﻿@model RentWheels.Models.CarBackViewModel
+@{
+    ViewBag.Title = "CarBack";
+}
+<link href="~/Content/CarBack.css" rel="stylesheet" />
+
+   <div class="container" id="container1">
+    <div class="form-container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3 form-content">
+                <h2 class="text-center">Rent a Car</h2>
+                @using (Html.BeginForm("SaveReturnData", "CarBack", FormMethod.Post, new { @class = "return-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label for="CarNo">Car Number:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
+                            @Html.DropDownListFor(model => model.CarNo, new SelectList(new List<SelectListItem>(), "Value", "Text"), "Please Select Car No", new { @class = "form-control", required = "required" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ReturnDate"><span class="glyphicon glyphicon-calendar"></span> Return Date:</label>
+                        @Html.TextBoxFor(model => model.ReturnDate, new { @class = "form-control", type = "datetime-local", required = "required" })
+                    </div>
+                    <div class="form-group">
+                        <label for="ExpiredDays"><span class="glyphicon glyphicon-time"></span> Number of Expired Days:</label>
+                        @Html.TextBoxFor(model => model.ExpiredDays, new { @class = "form-control", required = "required" })
+                    </div>
+                    <div class="form-group">
+                        <label for="CarFees"><span class="glyphicon glyphicon-time"></span> Car Fees:</label>
+                        <input type="text" id="Fees" class="form-control" name="Fees" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="TotalAmount"><span class="glyphicon glyphicon-usd"></span> Total Amount:</label>
+                        @Html.TextBoxFor(model => model.TotalAmount, new { @class = "form-control", required = "required" })
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Submit</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+    @section scripts {
+        <script src="~/Scripts/jquery-1.10.2.js"></script>
+        <script src="~/Scripts/jquery-ui-1.11.4/jquery-ui.js"></script>
+        <script src="~/Scripts/jquery.validate.js"></script>
+        <script src="~/Scripts/CarRental.js"></script>
+    }
+

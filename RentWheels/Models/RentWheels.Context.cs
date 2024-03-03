@@ -30,5 +30,6 @@ namespace RentWheels.Models
         public virtual DbSet<CarReturn> CarReturns { get; set; }
         public virtual DbSet<RegisterDetail> RegisterDetails { get; set; }
         public virtual DbSet<RoleDetail> RoleDetails { get; set; }
+        public virtual DbSet<DisCount> DisCounts { get; set; }
     }
 }

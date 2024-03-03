@@ -1,35 +1,177 @@
-﻿body {
-    background:linear-gradient(rgba(255, 255, 255, 0.87),#ccc,rgba(0, 0, 0, 0.1),#808080);
-}
-
-/* Add your CSS styles here */
-.product-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.product-card {
-    width: calc(30% - 10px); /* Adjust card width as per your requirement */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: rgba(255, 255, 255, 0.87); /* Peripheral color */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
-}
-
-    .product-card .product-image {
-        margin-left: 5%;
-        width: 90%;
-        height: 30%;
-        border-radius: 5px; /* Ensure consistent image border radius */
+﻿/* CSS for Car Cards */
+    .product-card {
+        margin-bottom: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease-in-out;
+        height: 100%; /* Ensuring uniform card sizes */
     }
 
-.product-info {
-    margin-top: 10px;
+        .product-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+    .product-image {
+        width: 100%;
+        height: 200px; /* Adjust the height as needed */
+        object-fit: cover; /* Ensuring the image fills the container */
+    }
+
+    .product-info {
+        padding: 20px;
+        background-color: #f5f5f5; /* Background color for card body */
+    }
+
+    #panel-heading {
+        background-color: #007bff; /* Header background color */
+        border-bottom: none;
+        text-align:left;
+        color: #fff; /* Header text color */
+        
+    }
+
+    #panel-heading1 {
+        background-color: #007bff; /* Header background color */
+        border-bottom: none;
+        text-align:center;
+        color: #fff; /* Header text color */
+    }
+
+    .panel-footer {
+        background-color: #f5f5f5; /* Footer background color */
+        border-top: none;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+    /* Responsive CSS for Form */
+    .form-group {
+        margin-right: 10px; /* Adjust spacing between form elements */
+    }
+
+@media (max-width: 768px) {
+        .form-group {
+            margin-right: 0; /* Reset margin for smaller screens */
+            margin-bottom: 10px; /* Add margin bottom for better spacing */
+        }
+    }
+
+
+    .btn {
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-reset {
+        background-color: #f1d185;
+    }
+
+    .btn-reset:hover {
+        background-color: #f1d185;
+    }
+
+    /* 3D effect */
+    .btn-3d {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-3d::before {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .btn-3d:hover::before {
+        top: 0;
+    }
+
+    .availability {
+    font-weight: bold;
 }
 
-.list-group {
-    background-color: rgba(255, 255, 255, 0.87);
+.available {
+    color: green;
+}
+
+.unavailable {
+    color: red;
+}
+
+.list-group-item {
+        border: none;
+        padding: 10px 0;
+    }
+
+    .list-group-item strong {
+        color: #0066c0; /* Amazon's primary color */
+    }
+
+    .list-group {
+        margin-bottom: 20px;
+    }
+
+    .list-group-item {
+        border: none;
+        padding: 15px 0;
+        border-bottom: 1px solid #eaeaea; /* Light border color */
+    }
+
+    .list-group-item:last-child {
+        border-bottom: none; /* Remove bottom border for the last item */
+    }
+
+    .list-group-item strong {
+        color: #0066c0; /* Amazon's primary color */
+        margin-right: 10px;
+    }
+
+    .list-group-item .text-muted {
+        color: #767676; /* Amazon's muted color */
+    }
+
+    .list-group-item .badge {
+        background-color: #f0c14b; /* Amazon's badge background color */
+        color: #111; /* Badge text color */
+        font-size: 14px;
+        padding: 6px 8px;
+        border-radius: 5px;
+        margin-left: 5px;
+    }
+
+
+
+.discount-offer {
+    color: #c00;
+    font-weight: bold;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
 }

@@ -2,123 +2,245 @@
 @{
     ViewBag.Title = "Register";
 }
-@Styles.Render("~/Content/css")
-@*<link href="~/Content/Register.css" rel="stylesheet" />*@
-@Scripts.Render("~/bundles/modernizr")
-
 <style>
-    #contmain {
+   .con {
         display: flex;
         justify-content: center;
     }
 
-    #cont {
-        background-color: #85efec;
-        width: auto;
-        padding: 40px;
+    .form-container {
+        background-color: #f9f9f9;
+        padding: 20px;
+        /*margin: 20px;*/
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        max-width: 900px;
+        width: 100%;
     }
 
-    #imgcont {
-        display: flex;
-        justify-content: center;
+    .form-group {
+        margin: 20px;
     }
+
+    .form-control {
+        border-radius: 8px;
+        width: 100%;
+    }
+
+    .input-group {
+        width: 48%;
+    }
+
+    .input-group-addon {
+        padding: 6px 12px;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1;
+        color: #555;
+        text-align: center;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .text-danger {
+        color: #dc3545;
+    }
+
+    .show-password {
+        position: absolute;
+        right: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        padding: 8px 12px;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .input-group-addon.show-password i {
+        margin-left: -30px;
+    }
+
+    #password {
+        border-radius: 8px;
+    }
+
+    .full {
+        max-width: 600px;
+        
+    }
+    .form-details{
+        /*display:flex;*/
+        justify-content:center;
+        max-width:600px;
+        padding:20px;
+    }
+    .space{
+        margin-bottom:20px;
+    }
+    #show-hide-pass{
+        border:none;
+        background-color:transparent;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        padding: 8px 12px;
+    }
+    #show-hide{
+        border:none;
+        background-color:transparent;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        padding: 8px 12px;       
+    }
+    
 </style>
-<div class="container col-md-12" id="contmain">
-    <div class="container" id="cont">
-        <div class="form-container">
-            <div class="col-md-12" id="imgcont">
-                <img src="~/Content/images/logo2.jpg" alt="Logo">
-            </div>
-            <div class="col-md-12" id="imgcont">
-                <h4>Please Register</h4>
-            </div>
-
-            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "needs-validation", novalidate = "true" }))
+<div class="container con">
+    <div class="row">
+        <div class="col-md-6 form-container">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                     <!-- Logo -->
-
-                <div class="row">
-                    <!-- Left Column -->
-                    <div class="col-md-12">
-                        <!-- Username -->
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RegisterDetail.Username)
-                            @Html.TextBoxFor(m => m.RegisterDetail.Username, new { @class = "form-control", required = "true", placeholder = "Enter your username" })
+                <h2>Create New Account</h2>
+                <p class="text-danger">@ViewBag.Message</p>
+                <div class="container form-details">
+                    <div class="form-group ">
+                        <div class="row">
+                            <div class="col-md-6 space">
+                                @Html.TextBoxFor(m => m.RegisterDetail.Username, new { @class = "form-control", placeholder = "Username", required = "required" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.RegisterDetail.PhoneNo, new { @class = "form-control", placeholder = "Phone Number", required = "required" })
+                            </div>
                         </div>
-                        <!-- Email -->
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RegisterDetail.Email)
-                            @Html.TextBoxFor(m => m.RegisterDetail.Email, new { @class = "form-control", type = "email", required = "true", placeholder = "Enter your email" })
-                        </div>
-                        <!-- Phone Number -->
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RegisterDetail.PhoneNo)
-                            @Html.TextBoxFor(m => m.RegisterDetail.PhoneNo, new { @class = "form-control", required = "true", placeholder = "Enter your phone number" })
-                        </div>
-                        <!-- Gender -->
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RegisterDetail.Gender)
-                            @Html.DropDownListFor(m => m.RegisterDetail.Gender, new List<SelectListItem>
-                                {
-                                    new SelectListItem { Text = "Male", Value = "Male" },
-                                    new SelectListItem { Text = "Female", Value = "Female" },
-                                    new SelectListItem { Text = "Other", Value = "Other" }
-                                }, "Select Gender", new { @class = "form-control", required = "true" })
-                        </div>
-                        <!-- Driving License Number -->
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RegisterDetail.DrivingLicenseNo)
-                            @Html.TextBoxFor(m => m.RegisterDetail.DrivingLicenseNo, new { @class = "form-control", required = "true", placeholder = "Enter your driving license number" })
-                        </div>
-                        <!-- Aadhar Number -->
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RegisterDetail.AadharNo)
-                            @Html.TextBoxFor(m => m.RegisterDetail.AadharNo, new { @class = "form-control", required = "true", placeholder = "Enter your Aadhar number" })
-                        </div>
-                        <!-- Age -->
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RegisterDetail.Age)
-                            @Html.TextBoxFor(m => m.RegisterDetail.Age, new { @class = "form-control", type = "number", required = "true", placeholder = "Enter your age" })
-                        </div>
-                        <!-- Address -->
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RegisterDetail.Address)
-                            @Html.TextAreaFor(m => m.RegisterDetail.Address, new { @class = "form-control", rows = "3", required = "true", placeholder = "Enter your address" })
-                        </div>
-                        <!-- Password -->
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RegisterDetail.Password)
-                            @Html.PasswordFor(m => m.RegisterDetail.Password, new { @class = "form-control", id = "password", required = "true", placeholder = "Enter your password" })
-                        </div>
-                        <!-- Confirm Password -->
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.RegisterDetail.ConfirmPassword)
-                            @Html.PasswordFor(m => m.RegisterDetail.ConfirmPassword, new { @class = "form-control", id = "confirmPassword", required = "true", placeholder = "Confirm your password" })
-                        </div>
-                        <!-- Role Dropdown -->
-                        @*<div class="form-group">
-                            <label for="RoleId">Select Role:</label>
-                            @Html.DropDownListFor(m => m.RegisterDetail.RoleId, new SelectList(Model.RoleDetails, "RoleId", "RoleName"), "Select Role", new { @class = "form-control", required = "true" })
-                        </div>*@
                     </div>
-                </div>
-                    <!-- Submit Button -->
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Register</button>
+                    <div class="form-group">
+                        @*<div class="col-md-12">*@
+                        @Html.TextBoxFor(m => m.RegisterDetail.Email, new { @class = "form-control  full", type = "email", placeholder = "Email", required = "required" })
+                        @*</div>*@
                     </div>
-            }
-            <!-- Success Message -->
-            @if (TempData["Message"] != null)
-            {
-                <div class="alert alert-success" role="alert">
-                    @TempData["Message"]
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6 space">
+                                @Html.TextBoxFor(m => m.RegisterDetail.Age, new { @class = "form-control", type = "number", placeholder = "Age", required = "required" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(m => m.RegisterDetail.Gender, new List<SelectListItem>
+                            {
+                                new SelectListItem { Text = "Male", Value = "Male" },
+                                new SelectListItem { Text = "Female", Value = "Female" },
+                                new SelectListItem { Text = "Other", Value = "Other" }
+                            }, "Select Gender", new { @class = "form-control", required = "required" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @*<div class="col-md-12">*@
+                        @Html.TextBoxFor(m => m.RegisterDetail.AadharNo, new { @class = "form-control full", placeholder = "Aadhar No", required = "required" })
+                        @*</div>*@
+                    </div>
+                    <div class="form-group">
+                        @*<div class="col-md-12">*@
+                        @Html.TextBoxFor(m => m.RegisterDetail.DrivingLicenseNo, new { @class = "form-control full", placeholder = "Driving License Number", required = "required" })
+                        @*</div>*@
+                    </div>
+                    <div class="form-group">
+                        @*<div class="col-md-12">*@
+                        @Html.TextAreaFor(m => m.RegisterDetail.Address, new { @class = "form-control full", rows = "3", placeholder = "Address", required = "required" })
+                        @*</div>*@
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6 space">
+                                @Html.TextBoxFor(m => m.RegisterDetail.Password, new { @class = "form-control", type = "password", id = "password", placeholder = "Password", required = "required" })
+                                <button type="button" onclick="togglePasswordVisibility()" class="glyphicon glyphicon-eye-open" id="show-hide-pass"></button>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.RegisterDetail.ConfirmPassword, new { @class = "form-control", type = "password", id = "Cpassword", placeholder = "Confirm Password", required = "required" })
+                                <button type="button" onclick="togPasswordVisibility()" class="glyphicon glyphicon-eye-open" id="show-hide"></button>
+                                @*<span class="input-group-addon show-password" id="showPassword">
+                                    <i class="glyphicon glyphicon-eye-open"></i>
+                                </span>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                    </div>
                 </div>
             }
         </div>
     </div>
 </div>
-@Scripts.Render("~/bundles/jquery")
-<script src="~/Scripts/Register.js"></script>
-@Scripts.Render("~/bundles/bootstrap")
 
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script>
+    //$(document).ready(function () {
+    //    $("#showPassword, #showConfirmPassword").click(function () {
+    //        var passwordField = $(this).closest('.input-group').find('input');
+    //        var passwordFieldType = passwordField.attr("type");
+    //        var icon = $(this).find('i');
+
+    //        if (passwordFieldType === "password") {
+    //            passwordField.attr("type", "text");
+    //            icon.removeClass("glyphicon glyphicon-eye-open").addClass("glyphicon glyphicon-eye-close");
+    //        } else {
+    //            passwordField.attr("type", "password");
+    //            icon.removeClass("glyphicon glyphicon-eye-close").addClass("glyphicon glyphicon-eye-open");
+    //        }
+    //    });
+    //});
+
+    function togglePasswordVisibility() {
+        var passField = document.getElementById("password");
+        var passToggle = document.getElementById("show-hide-pass");
+        if (passField.type === "password") {
+            passField.type = "text";
+            passToggle.classList.remove("glyphicon-eye-close");
+            passToggle.classList.add("glyphicon-eye-open");
+        } else {
+            passField.type = "password";
+            passToggle.classList.remove("glyphicon-eye-open");
+            passToggle.classList.add("glyphicon-eye-close");
+        }
+    }
+    function togPasswordVisibility() {
+        var passField = document.getElementById("Cpassword");
+        var passToggle = document.getElementById("show-hide");
+        if (passField.type === "password") {
+            passField.type = "text";
+            passToggle.classList.remove("glyphicon-eye-close");
+            passToggle.classList.add("glyphicon-eye-open");
+        } else {
+            passField.type = "password";
+            passToggle.classList.remove("glyphicon-eye-open");
+            passToggle.classList.add("glyphicon-eye-close");
+        }
+    }
+</script>
